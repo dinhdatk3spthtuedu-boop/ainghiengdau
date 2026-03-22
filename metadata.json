@@ -1,0 +1,7 @@
+{
+  "name": "AI TOÁN THẦY ĐẠT PC",
+  "description": "Game tương tác bằng cử động đầu dành cho học sinh mầm non",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
