@@ -56,7 +56,7 @@ const QuestionRenderer = ({
   }
 
   return (
-    <h2 className={`font-black text-gray-800 leading-tight px-4 w-full break-words ${isSimultaneous ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-xl sm:text-3xl md:text-5xl'}`}>
+    <h2 className={`font-black text-gray-800 leading-tight px-4 w-full break-words ${isSimultaneous ? 'text-xl sm:text-2xl lg:text-3xl' : 'text-lg sm:text-2xl md:text-4xl'}`}>
       {question.question}
     </h2>
   );
@@ -748,8 +748,8 @@ export default function Game() {
           <>
             {/* Simultaneous Mode: Top-Middle-Bottom Layout */}
             
-            {/* Top Section: Questions (Increased height) */}
-            <div className="grid grid-cols-2 gap-3 h-64 sm:h-80 min-h-[250px]">
+            {/* Top Section: Questions (Reduced height) */}
+            <div className="grid grid-cols-2 gap-3 h-48 sm:h-60 min-h-[180px]">
               {activeTeams.map((team, tIdx) => {
                 const currentQ = teamQuestions[tIdx][currentIndexes[tIdx]];
                 if (!currentQ) return null;
@@ -800,8 +800,8 @@ export default function Game() {
                 </div>
               </div>
 
-              {/* Central Camera */}
-              <div className="relative w-64 aspect-video sm:w-80 shrink-0">
+              {/* Central Camera (Enlarged) */}
+              <div className="relative w-80 aspect-video sm:w-[450px] shrink-0">
                 <div className="absolute inset-0 rounded-2xl border-4 border-white shadow-2xl overflow-hidden bg-gray-900 ring-4 ring-indigo-500/30">
                   <video ref={videoRef} className="w-full h-full object-cover transform scale-x-[-1]" playsInline muted />
                   <canvas ref={canvasRef} className="absolute inset-0 w-full h-full transform scale-x-[-1]" />
@@ -846,8 +846,8 @@ export default function Game() {
               </div>
             </div>
 
-            {/* Bottom Section: Answers (Balanced height and alignment) */}
-            <div className="grid grid-cols-2 gap-6 h-56 sm:h-64 min-h-[200px] px-2">
+            {/* Bottom Section: Answers (Reduced height) */}
+            <div className="grid grid-cols-2 gap-6 h-40 sm:h-52 min-h-[150px] px-2">
               {activeTeams.map((team, tIdx) => {
                 const currentQ = teamQuestions[tIdx][currentIndexes[tIdx]];
                 if (!currentQ) return null;
@@ -893,7 +893,7 @@ export default function Game() {
                                   {currentQ[`${opt}_type` as keyof Question] === 'image' || (currentQ.type === 'image' && !currentQ[`${opt}_type` as keyof Question]) ? (
                                     <img src={currentQ[opt as keyof Question] as string} alt={`Option ${opt}`} className="max-h-full max-w-full object-contain rounded-2xl shadow-sm" />
                                   ) : (
-                                    <span className="font-black text-gray-800 text-center break-words px-2 text-lg sm:text-2xl lg:text-3xl tracking-tight">
+                                    <span className="font-black text-gray-800 text-center break-words px-2 text-base sm:text-xl lg:text-2xl tracking-tight">
                                       {currentQ[opt as keyof Question] as string}
                                     </span>
                                   )}
@@ -974,9 +974,9 @@ export default function Game() {
                     )}
                   </div>
 
-                  {/* Answers Area */}
+                  {/* Answers Area (Reduced height) */}
                   {!isFinished && (
-                    <div className="grid grid-cols-2 gap-2 sm:h-64 md:h-80 min-h-[200px]">
+                    <div className="grid grid-cols-2 gap-2 sm:h-48 md:h-60 min-h-[150px]">
                       {['A', 'B'].map((opt) => {
                         const isSelected = selectedAnswers[tIdx] === opt;
                         const isCorrect = currentQ.correct === opt;
@@ -1012,7 +1012,7 @@ export default function Game() {
                               {currentQ[`${opt}_type` as keyof Question] === 'image' || (currentQ.type === 'image' && !currentQ[`${opt}_type` as keyof Question]) ? (
                                 <img src={currentQ[opt as keyof Question] as string} alt={`Option ${opt}`} className="max-h-full max-w-full object-contain rounded-lg" />
                               ) : (
-                                <span className="font-bold text-gray-800 text-center break-words px-1 text-2xl sm:text-4xl md:text-6xl">
+                                <span className="font-bold text-gray-800 text-center break-words px-1 text-xl sm:text-3xl md:text-5xl">
                                   {currentQ[opt as keyof Question] as string}
                                 </span>
                               )}
@@ -1051,8 +1051,8 @@ export default function Game() {
                   )}
                 </div>
 
-                {/* Camera Sidebar (Only in single mode) */}
-                <div className="w-full lg:w-80 flex flex-col gap-4">
+                {/* Camera Sidebar (Enlarged, Only in single mode) */}
+                <div className="w-full lg:w-[450px] flex flex-col gap-4">
                   <div className="bg-white rounded-2xl shadow-sm border-2 border-sky-200 p-2 relative aspect-video overflow-hidden">
                     <video ref={videoRef} className="w-full h-full object-cover transform scale-x-[-1] rounded-xl bg-gray-900" playsInline muted />
                     <canvas ref={canvasRef} className="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] transform scale-x-[-1]" />
